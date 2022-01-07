@@ -1,42 +1,42 @@
 name: build nodejs
 on:
-    workflow_dispatch:
-    schedule:
-        - cron: '0 0 * * 1'
-    push:
-        branches:
-            - master
-        paths:
-            - nodejs/*
+  workflow_dispatch:
+  schedule:
+    - cron: "0 0 * * 1"
+  push:
+    branches:
+      - master
+    paths:
+      - nodejs/*
 jobs:
-    push:
-        name: 'linux123123:nodejs_${{ matrix.tag }}'
-        runs-on: ubuntu-latest
-        strategy:
-            fail-fast: false
-            matrix:
-                tag:
-                    - 16
-        permissions:
-            contents: read
-            packages: write
-        steps:
-            - uses: actions/checkout@v2
-            - uses: docker/setup-buildx-action@v1
-              with:
-                  version: 'v0.5.1'
-                  buildkitd-flags: --debug
-            - name: Log into registry ${{ env.REGISTRY }}
-              uses: docker/login-action@v1
-              with:
-                  registry: ${{ env.REGISTRY }}
-                  username: ${{ github.actor }}
-                  password: ${{ secrets.GITHUB_TOKEN }}
-            - uses: docker/build-push-action@v2
-              with:
-                  context: ./nodejs
-                  file: ./nodejs/${{ matrix.tag }}/Dockerfile
-                  platforms: linux/amd64
-                  push: true
-                  tags: |
-                      ghcr.io/linux123123/linux123123:nodejs_${{ matrix.tag }}
+  push:
+    name: "linux123123:nodejs_${{ matrix.tag }}"
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        tag:
+          - 16
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v2
+      - uses: docker/setup-buildx-action@v1
+        with:
+          version: "v0.5.1"
+          buildkitd-flags: --debug
+      - name: Log into registry ${{ env.REGISTRY }}
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - uses: docker/build-push-action@v2
+        with:
+          context: ./nodejs
+          file: ./nodejs/${{ matrix.tag }}/Dockerfile
+          platforms: linux/amd64
+          push: true
+          tags: |
+            ghcr.io/linux123123/linux123123:nodejs_${{ matrix.tag }}
