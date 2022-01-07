@@ -1,5 +1,4 @@
-#!/bin/ash
-# shellcheck shell=dash
+#!/bin/bash
 
 TZ=${TZ:-UTC}
 export TZ
