@@ -6,7 +6,7 @@ LABEL       org.opencontainers.image.source="https://github.com/linux123123/yolk
 LABEL       org.opencontainers.image.licenses=MIT
 
 RUN         apt-get -y update
-RUN         apt-get -y install curl ca-certificates openssl ffmpeg git tar python3 build-essential iproute2 sqlite3
+RUN         apt-get -y install curl jo ca-certificates openssl ffmpeg git tar python3 build-essential iproute2 sqlite3
 RUN			useradd -d /home/container -m container
 
 USER        container
