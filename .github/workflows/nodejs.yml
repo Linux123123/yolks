@@ -22,6 +22,7 @@ jobs:
       packages: write
     steps:
       - uses: actions/checkout@v2
+      - uses: docker/setup-qemu-action@v1
       - uses: docker/setup-buildx-action@v1
         with:
           version: "v0.5.1"
@@ -36,7 +37,7 @@ jobs:
         with:
           context: ./nodejs
           file: ./nodejs/${{ matrix.tag }}/Dockerfile
-          platforms: linux/amd64
+          platforms: linux/amd64,linux/arm64
           push: true
           tags: |
             ghcr.io/linux123123/linux123123:nodejs_${{ matrix.tag }}

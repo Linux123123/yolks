@@ -1,4 +1,4 @@
-FROM        node:16-bullseye-slim
+FROM        --platform=$TARGETOS/$TARGETARCH node:16-bullseye-slim
 
 LABEL       author="Linux123123" maintainer="linas.alexx@gmail.com"
 
