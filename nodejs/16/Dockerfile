@@ -1,6 +1,6 @@
 FROM        --platform=$TARGETOS/$TARGETARCH node:16-bullseye-slim
 
-LABEL       author="Linux123123" maintainer="linas.alexx@gmail.com"
+LABEL       author="Linux123123" maintainer="me@linux123123.com"
 
 LABEL       org.opencontainers.image.source="https://github.com/linux123123/yolks"
 LABEL       org.opencontainers.image.licenses=MIT
