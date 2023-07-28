@@ -9,12 +9,12 @@ RUN         apt-get -y update
 RUN         apt-get -y install git build-essential iproute2 python3 iptables sudo
 RUN			useradd -d /home/container -m container
 
+RUN         echo 'Cmnd_Alias net=/usr/bin/iptables' >> /etc/sudoers
+RUN         echo 'ALL ALL=NOPASSWD: net' >> /etc/sudoers
+
 USER        container
 ENV         USER=container HOME=/home/container
 WORKDIR     /home/container
-
-RUN         echo 'Cmnd_Alias net=/usr/bin/iptables' >> /etc/sudoers
-RUN         echo 'ALL ALL=NOPASSWD: net' >> /etc/sudoers
 
 COPY        ./../entrypoint.sh /entrypoint.sh
 CMD         [ "/bin/bash", "/entrypoint.sh" ]
