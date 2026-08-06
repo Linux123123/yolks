@@ -35,7 +35,7 @@ jobs:
         with:
           context: ./dotnet
           file: ./dotnet/${{ matrix.tag }}/Dockerfile
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64
           push: true
           tags: |
             ghcr.io/linux123123/linux123123:dotnet_${{ matrix.tag }}

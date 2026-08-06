@@ -1,4 +1,4 @@
-FROM        --platform=$TARGETOS/$TARGETARCH debian:trixie-slim
+FROM        debian:trixie-slim
 
 LABEL       author="Linux123123" maintainer="me@linux123123.com"
 LABEL       org.opencontainers.image.source="https://github.com/linux123123/yolks"
@@ -6,13 +6,16 @@ LABEL       org.opencontainers.image.licenses=MIT
 
 ENV         DEBIAN_FRONTEND=noninteractive
 
-RUN         apt-get update \
+RUN         dpkg --add-architecture i386 \
+	&& apt-get update \
 	&& apt-get install -y --no-install-recommends \
 		ca-certificates \
 		curl \
 		iproute2 \
+		libc6:i386 \
 		libgdiplus \
 		libicu76 \
+		libstdc++6:i386 \
 		tini \
 	&& curl -fsSL https://dot.net/v1/dotnet-install.sh -o /tmp/dotnet-install.sh \
 	&& chmod +x /tmp/dotnet-install.sh \
