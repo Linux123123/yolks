@@ -9,8 +9,10 @@ ENV         DEBIAN_FRONTEND=noninteractive
 RUN         dpkg --add-architecture i386 \
 	&& apt-get update \
 	&& apt-get install -y --no-install-recommends \
+		build-essential \
 		ca-certificates \
 		curl \
+		git \
 		iproute2 \
 		libc6:i386 \
 		libgdiplus \
