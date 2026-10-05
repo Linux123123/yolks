@@ -1,12 +1,13 @@
 #!/bin/bash
 set -e
-
 cd /home/container
 
-# Pterodactyl mounts the server directory over /home/container. Seed a default
-# startup script on first boot so each server can customize it in its file manager.
+# Preserve the existing persistent startup script and CRDB invocation.
 if [ ! -f /home/container/start.sh ]; then
     cp /usr/local/share/cockroach/start.sh /home/container/start.sh
 fi
 
+if [ -f /home/container/tikv-config/enabled ]; then
+    exec python3 /usr/local/share/cockroach/supervise.py
+fi
 exec /bin/bash /home/container/start.sh
